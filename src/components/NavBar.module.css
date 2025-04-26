@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap');
+
+:root {
+  --farm-green-dark: #4a6a4f;
+  --farm-green: #6a994e;
+  --farm-green-light: #a7c957;
+  --farm-text-dark: #333d29;
+  --farm-text-medium: #656d4a;
+  --farm-border-color: #e0e0d1;
+  --farm-bg-light: #f5f5f0;
+}
+
+.navbar {
+  width: 100%;
+  padding: 12px 0; 
+  background-color: rgba(255, 255, 255, 0.95); 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 3px 12px rgba(106, 153, 78, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 990;
+  border-bottom: 1px solid var(--farm-border-color);
+  font-family: 'Quicksand', sans-serif;
+}
+
+.navContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brandLink {
+  text-decoration: none;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.brandLogo {
+  height: 32px;
+  width: auto; 
+  object-fit: contain; 
+  vertical-align: middle;
+}
+
+.brandName {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--farm-green-dark);
+  line-height: 1;
+  vertical-align: middle; 
+}
+
+.logoutButton {
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background-color: transparent;
+  color: var(--farm-text-medium);
+  border: 1px solid var(--farm-border-color);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoutButton:hover:not(:disabled) {
+  background-color: var(--farm-bg-light);
+  color: var(--farm-green-dark);
+  border-color: var(--farm-green-light);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(106, 153, 78, 0.1);
+}
+
+@media (max-width: 768px) {
+  .navContent {
+    padding: 0 20px;
+  }
+  .brandName {
+    font-size: 1.4rem;
+  }
+  .brandLogo {
+    height: 28px;
+  }
+  .logoutButton {
+      padding: 7px 15px;
+      font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+      padding: 10px 0;
+  }
+  .navContent {
+    padding: 0 15px;
+  }
+  .brandName {
+    font-size: 1.25rem;
+  }
+  .brandLogo {
+    height: 24px;
+  }
+  .brand {
+    gap: 8px;
+  }
+
+  .logoutButton {
+      padding: 8px 12px;
+      gap: 6px;
+  }
+
+}
