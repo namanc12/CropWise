@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+:root {
+  --farm-green-dark: #4a6a4f;
+  --farm-green: #6a994e;
+  --farm-green-light: #a7c957;
+  --farm-brown: #8a5a44;
+  --farm-brown-light: #dbc8a7;
+  --farm-sky-blue: #e6f2ff;
+  --farm-text-dark: #333d29;
+  --farm-text-medium: #656d4a;
+  --farm-text-light: #a4ac86;
+  --farm-border-color: #e0e0d1;
+  --farm-bg-light: #f5f5f0; /* Main background */
+  --farm-bg-card: #ffffff;
+  --farm-error: #c84648;
+  --farm-error-bg: #fdecea;
+  --farm-button-text: #ffffff; 
+
+  --navbar-height: 70px;
+
+  font-family: 'Quicksand', sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+
+  color-scheme: light;
+  color: var(--farm-text-dark);
+  background-color: var(--farm-bg-light);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.main-content {
+  width: 100%;
+  flex-grow: 1;
+  display: flex; 
+  flex-direction: column;
+  transition: padding-top 0.3s ease;
+}
+
+.button {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Quicksand', sans-serif;
+  transition: all 0.3s ease;
+  color: var(--farm-button-text);
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(106, 153, 78, 0.15);
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(106, 153, 78, 0.25);
+}
+.button:active:not(:disabled) {
+  transform: scale(0.98);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+.button:disabled {
+  background-color: var(--farm-border-color);
+  color: var(--farm-text-light);
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+}
+.button-primary {
+  background: linear-gradient(135deg, var(--farm-green-light), var(--farm-green));
+  color: var(--farm-button-text);
+}
+.button-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--farm-green), var(--farm-green-dark));
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--farm-text-dark);
+}
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--farm-border-color);
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: 'Quicksand', sans-serif;
+  background-color: var(--farm-bg-card);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  color: var(--farm-text-dark);
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--farm-green);
+  box-shadow: 0 0 0 3px rgba(106, 153, 78, 0.2);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+   color: var(--farm-text-light);
+   opacity: 0.8;
+}
+.form-group textarea {
+   resize: vertical;
+   min-height: 80px;
+}
+
+.error-message {
+  color: var(--farm-error);
+  background-color: var(--farm-error-bg);
+  border: 1px solid var(--farm-error);
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 1.2rem;
+  color: var(--farm-text-medium);
+  font-weight: 500;
+}
+
+.mapboxgl-ctrl-group {
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1) !important;
+    border-radius: 8px !important;
+    border: none !important;
+    margin: 10px !important;
+    background-color: rgba(255, 255, 255, 0.9) !important; 
+}
+.mapboxgl-ctrl-group button.mapbox-gl-draw_ctrl-draw-btn {
+    background-color: transparent !important; 
+    border-radius: 8px !important;
+    width: 34px !important;
+    height: 34px !important;
+    transition: background-color 0.2s ease;
+}
+.mapboxgl-ctrl-group button.mapbox-gl-draw_ctrl-draw-btn:hover {
+     background-color: rgba(0,0,0,0.05) !important;
+}
+.mapbox-gl-draw_ctrl-draw-btn .mapbox_gl_draw_icon {
+    display: block;
+    width: 18px;
+    height: 18px;
+    background-size: contain;
+}
+.mapboxgl-ctrl-group button.active.mapbox-gl-draw_ctrl-draw-btn {
+    background-color: var(--farm-green-light) !important;
+    border-color: var(--farm-green) !important; 
+}
+.mapboxgl-ctrl-group button.active.mapbox-gl-draw_ctrl-draw-btn:hover {
+    background-color: var(--farm-green) !important;
+}
+
+.mapboxgl-ctrl-top-left,
+.mapboxgl-ctrl-top-right,
+.mapboxgl-ctrl-bottom-left,
+.mapboxgl-ctrl-bottom-right {
+    z-index: 1; 
+}
+.mapboxgl-ctrl-top-right {
+    margin: 0 !important; 
+}
+
+.mapboxgl-canvas:focus {
+    outline: none;
+}
