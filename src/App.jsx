@@ -1,42 +1,87 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+import React, { useState, useEffect, useMemo } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from './api/firebaseConfig';
+import { ref, get } from "firebase/database";
+import Login from './views/Login';
+import LandingPage from './views/LandingPage';
+import NavBar from './components/NavBar';
+import Farm3js from './views/Farm3js';
+import './index.css';
+
+function ProtectedRoute({ user, children }) {
+    if (!user) {
+        return <Navigate to="/login" replace />;
+    }
+    return children;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+function Layout({ user }) {
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/login';
+
+  const mainContentStyle = useMemo(() => ({
+    paddingTop: user && !isLoginPage ? 'var(--navbar-height, 70px)' : '0'
+  }), [user, isLoginPage]);
+
+  return (
+    <>
+      {user && !isLoginPage && <NavBar user={user} />}
+      <div className="main-content" style={mainContentStyle}>
+        <Routes>
+          <Route
+            path="/"
+            element={<Navigate to={user ? "/landing" : "/login"} replace />}
+          />
+          <Route
+            path="/login"
+            element={user ? <Navigate to="/landing" replace /> : <Login />}
+          />
+          <Route
+            path="/landing"
+            element={
+              <ProtectedRoute user={user}>
+                <LandingPage user={user} />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/farm/:assetId"
+            element={
+              <ProtectedRoute user={user}>
+                <Farm3js user={user} />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div>
+    </>
+  );
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+
+function App() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) {
+    return <div className="loading-container">Loading CropWise...</div>;
   }
-  to {
-    transform: rotate(360deg);
-  }
+
+  return (
+    <Router>
+      <Layout user={user} />
+    </Router>
+  );
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
+export default App;
