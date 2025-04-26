@@ -1,6 +1,6 @@
 [
     {
-      "origin": ["http://localhost:5173", "http://localhost:3000", "https://your-deployed-app-url.com"],
+      "origin": ["http://localhost:5173", "http://localhost:3000", "https://ofarm-cb4a2.web.app"],
       "method": ["GET"],
       "maxAgeSeconds": 3600
     }
